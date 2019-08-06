@@ -16,6 +16,8 @@ namespace VOLogistics.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public string Work { get; set; }
        
         [NotMapped]
         [Display(Name = "FullName")]

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,6 +13,7 @@ using VOLogistics.Models;
 
 namespace VelconLogistics.Controllers
 {
+    [Authorize]
     public class LoadsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -65,8 +67,14 @@ namespace VelconLogistics.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("LoadId,CompanyName,Amount,PickupDate,DeliverdDate,Location,DriverId,UserId")] Load load)
         {
+            ModelState.Remove("Load.User");
+            ModelState.Remove("Load.Driver");
+            ModelState.Remove("Load.UserId");
+            
             if (ModelState.IsValid)
             {
+                var currentUser = await GetCurrentUserAsync();
+                load.User = currentUser;
                 _context.Add(load);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

@@ -147,6 +147,9 @@ namespace VelconLogistics.Migrations
                     b.Property<string>("LastName")
                         .IsRequired();
 
+                    b.Property<string>("Work")
+                        .IsRequired();
+
                     b.HasKey("Id");
 
                     b.HasIndex("ApplicationUserId");
@@ -158,19 +161,29 @@ namespace VelconLogistics.Migrations
                         {
                             Id = 1,
                             FirstName = "Liiban",
-                            LastName = "Frances"
+                            LastName = "Frances",
+                            Work = "Ceva"
                         },
                         new
                         {
                             Id = 2,
                             FirstName = "Chris",
-                            LastName = "Morgan"
+                            LastName = "Morgan",
+                            Work = "Schneider"
                         },
                         new
                         {
                             Id = 3,
                             FirstName = "Luck",
-                            LastName = "Pierce"
+                            LastName = "Pierce",
+                            Work = "Fedex"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            FirstName = "Chris Hass",
+                            LastName = "Elis",
+                            Work = "UPS"
                         });
                 });
 
@@ -210,34 +223,49 @@ namespace VelconLogistics.Migrations
                         {
                             LoadId = 1,
                             Amount = 1200.0,
+                            CompanyName = "Ceva",
                             DeliverdDate = new DateTime(2019, 11, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 2,
                             IsDeliverd = true,
                             Location = "Nashville, TN",
                             PickupDate = new DateTime(2019, 10, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                            UserId = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk"
                         },
                         new
                         {
                             LoadId = 2,
                             Amount = 1000.0,
+                            CompanyName = "Schneider",
                             DeliverdDate = new DateTime(2019, 1, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 1,
-                            IsDeliverd = false,
+                            IsDeliverd = true,
                             Location = "Atlanta, GA",
                             PickupDate = new DateTime(2019, 11, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                            UserId = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk"
                         },
                         new
                         {
                             LoadId = 3,
                             Amount = 1050.0,
+                            CompanyName = "FedEx",
                             DeliverdDate = new DateTime(2019, 8, 11, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DriverId = 3,
                             IsDeliverd = true,
                             Location = "Columbus, OH",
                             PickupDate = new DateTime(2019, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserId = "00000000-ffff-ffff-ffff-ffffffffffff"
+                            UserId = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk"
+                        },
+                        new
+                        {
+                            LoadId = 4,
+                            Amount = 1050.0,
+                            CompanyName = "UPS",
+                            DeliverdDate = new DateTime(2019, 7, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DriverId = 4,
+                            IsDeliverd = true,
+                            Location = "Columbus, OH",
+                            PickupDate = new DateTime(2019, 9, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserId = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk"
                         });
                 });
 
@@ -305,7 +333,7 @@ namespace VelconLogistics.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cd375809-169e-4c16-a103-2b2acb174835",
+                            ConcurrencyStamp = "02459b5e-f443-4ced-93c4-ccc36e6642cb",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Ali",
@@ -314,11 +342,49 @@ namespace VelconLogistics.Migrations
                             Name = "Swift",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEBKxYzd8H5HWc89GnDvWNMOI53STGnmyHtK8orQktZCIcMbjGSQWRiMjM9dBfaueHQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJLZCmQ+dNoe5vKwNsSz7nL6RHfv4QE2nyyN9sad08AvbkLIOtgvkv6pfoc6KW14ew==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
                             UserName = "admin@admin.com"
+                        },
+                        new
+                        {
+                            Id = "00000000-nnnn-nnnn-nnnn-nnnnnnnnnnnn",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "98d87070-ed7e-4187-91fa-f84f054f3cdb",
+                            Email = "Dek@admin.com",
+                            EmailConfirmed = true,
+                            FirstName = "Dek",
+                            LastName = "Haji",
+                            LockoutEnabled = false,
+                            Name = "Ceva",
+                            NormalizedEmail = "DEK@ADMIN.COM",
+                            NormalizedUserName = "DEK@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELBF+VRaS7n8X1jrCp7xnjz1XnXc7aHEypgsGNcurrWOkkGbq+CKWf6JEOAhbsBIUg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794566",
+                            TwoFactorEnabled = false,
+                            UserName = "Dek@admin.com"
+                        },
+                        new
+                        {
+                            Id = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a827c924-103e-46c6-8497-7aab6ae24369",
+                            Email = "Jameka@admin.com",
+                            EmailConfirmed = true,
+                            FirstName = "Jameka",
+                            LastName = "Echlos",
+                            LockoutEnabled = false,
+                            Name = "Scheinder",
+                            NormalizedEmail = "JAMEKA@ADMIN.COM",
+                            NormalizedUserName = "JAMEKA@ADMIN.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJooy14FI4EUpDcGPdSHY3c4mcVlG7xA+GhA+m/YxdXTF4p80AWNFX7G+U8B/JisWg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794588",
+                            TwoFactorEnabled = false,
+                            UserName = "Jameka@admin.com"
                         });
                 });
 
