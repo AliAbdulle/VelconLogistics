@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using VelconLogistics.Models;
 using VOLogistics.Data;
 using VOLogistics.Models;
 
@@ -15,11 +17,15 @@ namespace VelconLogistics.Controllers
     public class DriversController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public DriversController(ApplicationDbContext context)
+        public DriversController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
         // GET: Drivers
         public async Task<IActionResult> Index()
@@ -56,10 +62,14 @@ namespace VelconLogistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,IsDeliverd")] Driver driver)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Work")] Driver driver)
         {
+            ModelState.Remove("Driver.User");
+            ModelState.Remove("Driver.UserId");
             if (ModelState.IsValid)
             {
+                var currentUser = await GetCurrentUserAsync();
+                driver.User = currentUser;
                 _context.Add(driver);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

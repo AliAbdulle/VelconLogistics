@@ -118,7 +118,6 @@ namespace VOLogistics.Data
               new Load()
               {
                   LoadId = 1,
-                  CompanyName = "Ceva",
                   Amount = 1200.00,
                   PickupDate = new DateTime(2019, 10, 01),
                   DeliverdDate = new DateTime(2019, 11, 01),
@@ -130,7 +129,6 @@ namespace VOLogistics.Data
                new Load()
                {
                    LoadId = 2,
-                   CompanyName = "Schneider",
                    Amount = 1000.00,
                    PickupDate = new DateTime(2019, 11, 05),
                    DeliverdDate = new DateTime(2019, 01, 11),
@@ -142,7 +140,6 @@ namespace VOLogistics.Data
                 new Load()
                 {
                     LoadId = 3,
-                    CompanyName = "FedEx",
                     Amount = 1050.00,
                     PickupDate = new DateTime(2019, 08, 05),
                     DeliverdDate = new DateTime(2019, 08, 11),
@@ -154,7 +151,6 @@ namespace VOLogistics.Data
                  new Load()
                  {
                      LoadId = 4,
-                     CompanyName = "UPS",
                      Amount = 1050.00,
                      PickupDate = new DateTime(2019, 09, 05),
                      DeliverdDate = new DateTime(2019, 07, 12),

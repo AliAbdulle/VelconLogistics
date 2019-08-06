@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using VelconLogistics.Models;
 
 namespace VOLogistics.Models
 {
@@ -23,6 +24,9 @@ namespace VOLogistics.Models
         [Display(Name = "FullName")]
         public string FullName => $"{FirstName} {LastName}";
 
-        public List<Load> Loads { get; set; }
+  
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
     }
 }

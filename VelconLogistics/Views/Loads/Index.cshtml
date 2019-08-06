@@ -15,9 +15,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
@@ -46,9 +44,7 @@
             @if (item.UserId == currentUserId)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CompanyName)
-                    </td>
+                   
                     <td>
                         @Html.DisplayFor(modelItem => item.Amount)
                     </td>

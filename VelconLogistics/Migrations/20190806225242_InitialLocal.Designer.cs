@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VOLogistics.Data;
 
 namespace VelconLogistics.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190806225242_InitialLocal")]
+    partial class InitialLocal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,20 +141,20 @@ namespace VelconLogistics.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("ApplicationUserId");
+
                     b.Property<string>("FirstName")
                         .IsRequired();
 
                     b.Property<string>("LastName")
                         .IsRequired();
 
-                    b.Property<string>("UserId");
-
                     b.Property<string>("Work")
                         .IsRequired();
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Driver");
 
@@ -327,7 +329,7 @@ namespace VelconLogistics.Migrations
                         {
                             Id = "00000000-ffff-ffff-ffff-ffffffffffff",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1742ec1a-a4d6-41af-bb17-a4ab94d9f529",
+                            ConcurrencyStamp = "66954ff9-2f53-458c-9614-9c24abbe1a0a",
                             Email = "admin@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Ali",
@@ -336,7 +338,7 @@ namespace VelconLogistics.Migrations
                             Name = "Swift",
                             NormalizedEmail = "ADMIN@ADMIN.COM",
                             NormalizedUserName = "ADMIN@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF/rUKUuCEhhvJo+JhdaSc6si7BWuB3BKkgmjhQZ/qGJS45IY/ZnLtqDR+2lgR5AjA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJW7kDAIj73X7KJS2XhR58EXw6TTk2e0RocCWEHCRMzkeM/6v90lDhNK3/gLOVYpKw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794577",
                             TwoFactorEnabled = false,
@@ -346,7 +348,7 @@ namespace VelconLogistics.Migrations
                         {
                             Id = "00000000-nnnn-nnnn-nnnn-nnnnnnnnnnnn",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "9c6e33e0-86bf-4b0e-8146-93a10cbf7377",
+                            ConcurrencyStamp = "38a69e6e-7c5f-4b8e-a674-8a7e883c182b",
                             Email = "Dek@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Dek",
@@ -355,7 +357,7 @@ namespace VelconLogistics.Migrations
                             Name = "Ceva",
                             NormalizedEmail = "DEK@ADMIN.COM",
                             NormalizedUserName = "DEK@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJEBE4nTRnRu4GV+FUsInWuDLQwkI12rZ+nTbdO3PFjdGp3DCl/TVzvXJ8wO7GmYiA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECsao8BIhTexZNW7ExWb6HFL693CXEoF5XWPN9r8JmEVjfQbV30DUGGAjfAdVrMALw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794566",
                             TwoFactorEnabled = false,
@@ -365,7 +367,7 @@ namespace VelconLogistics.Migrations
                         {
                             Id = "00000000-kkkk-kkkk-kkkk-kkkkkkkkkkkk",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4edbad40-a5c1-40f8-b6fd-50b619446cd8",
+                            ConcurrencyStamp = "ffe4d748-f62f-4835-af69-71a5b6525b2e",
                             Email = "Jameka@admin.com",
                             EmailConfirmed = true,
                             FirstName = "Jameka",
@@ -374,7 +376,7 @@ namespace VelconLogistics.Migrations
                             Name = "Scheinder",
                             NormalizedEmail = "JAMEKA@ADMIN.COM",
                             NormalizedUserName = "JAMEKA@ADMIN.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEC5E7Nxe2N9rrE0HBgjVjqvjoW969Q4uRulNx0DtQuNKIIJ4Jh5kGaPc51xDwVaKJQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE2mV4/i8a90gjgIpsoCJTvtDRilnfeMkxXrThRY+B2MHKT5bYsKe7/lMxk2SQmvkQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7f434309-a4d9-48e9-9ebb-8803db794588",
                             TwoFactorEnabled = false,
@@ -429,15 +431,15 @@ namespace VelconLogistics.Migrations
 
             modelBuilder.Entity("VOLogistics.Models.Driver", b =>
                 {
-                    b.HasOne("VelconLogistics.Models.ApplicationUser", "User")
+                    b.HasOne("VelconLogistics.Models.ApplicationUser")
                         .WithMany("Driver")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("VOLogistics.Models.Load", b =>
                 {
                     b.HasOne("VOLogistics.Models.Driver", "Driver")
-                        .WithMany()
+                        .WithMany("Loads")
                         .HasForeignKey("DriverId")
                         .OnDelete(DeleteBehavior.Cascade);
 
