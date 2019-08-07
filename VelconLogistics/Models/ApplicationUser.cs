@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using VOLogistics.Models;
+using VelconLogistics.Models;
 
 namespace VelconLogistics.Models
 {

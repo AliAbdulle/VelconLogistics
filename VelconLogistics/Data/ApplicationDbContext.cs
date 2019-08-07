@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using VelconLogistics.Models;
-using VOLogistics.Models;
 
-namespace VOLogistics.Data
+
+namespace VelconLogistics.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

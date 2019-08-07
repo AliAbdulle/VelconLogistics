@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using VelconLogistics.Models;
 
-namespace VOLogistics.Models
+namespace VelconLogistics.Models
 {
     public class Load
     {

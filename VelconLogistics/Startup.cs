@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VelconLogistics.Models;
-using VOLogistics.Data;
+using VelconLogistics.Data;
 
 namespace VelconLogistics
 {

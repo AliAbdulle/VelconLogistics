@@ -9,8 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VelconLogistics.Models;
 using VelconLogistics.Models.LoadViewModel;
-using VOLogistics.Data;
-using VOLogistics.Models;
+using VelconLogistics.Data;
 
 namespace VelconLogistics.Controllers
 {
@@ -93,17 +92,32 @@ namespace VelconLogistics.Controllers
         // GET: Loads/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+      
 
-            var currentUser = await GetCurrentUserAsync();
-            var viewModel = new LoadCreateViewModels
+            if (id == null)
             {
+                return NotFound();
+            }
 
+            var load = await _context.Load.FindAsync(id);
+            
+            if (load == null)
+            {
+                return NotFound();
+            }
+            var currentUser = await GetCurrentUserAsync();
+            var viewModel = new LoadEditViewModels
+
+            {
+                Load = load,
                 AvailableDriver = await _context
                 .Driver.Where(d => d.UserId == currentUser.Id).ToListAsync()
             };
+
+            ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "FullName", load.DriverId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", load.UserId);
             return View(viewModel);
         }
-
 
         // POST: Loads/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

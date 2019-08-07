@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using System;using System.Collections.Generic;
 using System.Linq;
-using VOLogistics.Models;
+using VelconLogistics.Models;
 
 namespace VelconLogistics.Models.LoadViewModel
 {

@@ -8,8 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VelconLogistics.Models;
-using VOLogistics.Data;
-using VOLogistics.Models;
+using VelconLogistics.Data;
 
 namespace VelconLogistics.Controllers
 {
