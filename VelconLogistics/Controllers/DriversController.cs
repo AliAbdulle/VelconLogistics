@@ -67,9 +67,9 @@ namespace VelconLogistics.Controllers
             ModelState.Remove("Driver.User");
             ModelState.Remove("Driver.UserId");
             if (ModelState.IsValid)
-            {
+          {
                 var currentUser = await GetCurrentUserAsync();
-                driver.User = currentUser;
+                driver.UserId = currentUser.Id;
                 _context.Add(driver);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -90,6 +90,7 @@ namespace VelconLogistics.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", driver.UserId);
             return View(driver);
         }
 
@@ -98,7 +99,7 @@ namespace VelconLogistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,IsDeliverd")] Driver driver)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FirstName,LastName,Work")] Driver driver)
         {
             if (id != driver.Id)
             {
@@ -109,6 +110,8 @@ namespace VelconLogistics.Controllers
             {
                 try
                 {
+                    var currentUser = await GetCurrentUserAsync();
+                    driver.User = currentUser;
                     _context.Update(driver);
                     await _context.SaveChangesAsync();
                 }

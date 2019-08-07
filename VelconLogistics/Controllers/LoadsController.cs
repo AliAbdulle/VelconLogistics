@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VelconLogistics.Models;
+using VelconLogistics.Models.LoadViewModel;
 using VOLogistics.Data;
 using VOLogistics.Models;
 
@@ -53,11 +54,16 @@ namespace VelconLogistics.Controllers
         }
 
         // GET: Loads/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "FirstName");
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id");
-            return View();
+            var currentUser = await GetCurrentUserAsync();
+            var viewModel = new LoadCreateViewModels
+            {
+                
+                AvailableDriver = await _context
+                .Driver.Where(d => d.UserId == currentUser.Id).ToListAsync()
+            };
+            return View(viewModel);
         }
 
         // POST: Loads/Create
@@ -65,49 +71,46 @@ namespace VelconLogistics.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LoadId,CompanyName,Amount,PickupDate,DeliverdDate,Location,DriverId,UserId")] Load load)
+        public async Task<IActionResult> Create(LoadCreateViewModels viewModels)
         {
             ModelState.Remove("Load.User");
             ModelState.Remove("Load.Driver");
             ModelState.Remove("Load.UserId");
-            
+
             if (ModelState.IsValid)
             {
                 var currentUser = await GetCurrentUserAsync();
-                load.User = currentUser;
-                _context.Add(load);
+                var Load = viewModels.Load;
+                Load.UserId = currentUser.Id;
+                _context.Add(Load);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "FirstName", load.DriverId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", load.UserId);
-            return View(load);
+            viewModels.AvailableDriver = await _context.Driver.ToListAsync();
+            return View(viewModels);
         }
-
+    
         // GET: Loads/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var load = await _context.Load.FindAsync(id);
-            if (load == null)
+            var currentUser = await GetCurrentUserAsync();
+            var viewModel = new LoadCreateViewModels
             {
-                return NotFound();
-            }
-            ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "FirstName", load.DriverId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", load.UserId);
-            return View(load);
+
+                AvailableDriver = await _context
+                .Driver.Where(d => d.UserId == currentUser.Id).ToListAsync()
+            };
+            return View(viewModel);
         }
+
 
         // POST: Loads/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LoadId,CompanyName,Amount,PickupDate,DeliverdDate,Location,DriverId,UserId")] Load load)
+        public async Task<IActionResult> Edit(int id, [Bind("LoadId,CompanyName,Amount,PickupDate,DeliverdDate,Location,DriverId,IsDeliverd,UserId")] Load load)
         {
             if (id != load.LoadId)
             {
@@ -136,8 +139,8 @@ namespace VelconLogistics.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["DriverId"] = new SelectList(_context.Driver, "Id", "FirstName", load.DriverId);
-            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", load.UserId);
+            ViewData["DriverId"] = new SelectList(_context.Driver, "UserId", "FullName", load.UserId);
+            ViewData["UserId"] = new SelectList(_context.ApplicationUsers, "Id", "Id", load.DriverId);
             return View(load);
         }
 
