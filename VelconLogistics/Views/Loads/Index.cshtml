@@ -10,7 +10,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -65,9 +65,9 @@
                     </td>
 
                     <td>
-                        <button asp-route-id="@item.LoadId" class="Edit">Edit</button> 
-                        <button asp-action="Details" asp-route-id="@item.LoadId">Details</button> 
-                        <button asp-action="Delete" asp-route-id="@item.LoadId">Delete</button>
+                        <a class="btn btn-secondary" asp-action="Edit" asp-route-id="@item.LoadId">Edit</a> 
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.LoadId">Details</a> 
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.LoadId">Delete</a>
                     </td>
                 </tr>
             }
