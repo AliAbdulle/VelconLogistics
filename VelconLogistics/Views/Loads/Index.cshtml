@@ -1,4 +1,7 @@
-﻿@model IEnumerable<VOLogistics.Models.Load>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+
+@model IEnumerable<VelconLogistics.Models.Load>
 
 @{
     ViewData["Title"] = "Index";
@@ -12,9 +15,7 @@
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.CompanyName)
-            </th>
+          
             <th>
                 @Html.DisplayNameFor(model => model.Amount)
             </th>
@@ -37,36 +38,39 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.CompanyName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Amount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PickupDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DeliverdDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Driver.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDeliverd)
-            </td>
+        @foreach (var item in Model)
+        {
+            var currentUserId = SignInManager.UserManager.GetUserId(User);
+            @if (item.UserId == currentUserId)
+            {
+                <tr>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PickupDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeliverdDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Driver.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsDeliverd)
+                    </td>
 
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LoadId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LoadId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.LoadId">Delete</a>
-            </td>
-        </tr>
-}
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.LoadId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.LoadId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.LoadId">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
     </tbody>
 </table>

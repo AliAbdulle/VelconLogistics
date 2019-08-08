@@ -5,14 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using VelconLogistics.Models;
 
-namespace VOLogistics.Models
+namespace VelconLogistics.Models
 {
     public class Load
     {
 
         public int LoadId { get; set; }
-
-        public string CompanyName { get; set; }
         [Required]
         public double Amount { get; set; }
         [Required]
@@ -26,9 +24,11 @@ namespace VOLogistics.Models
         public bool IsDeliverd { get; set; }
 
         public Load()
+            
         {
-            IsDeliverd = false;
+            IsDeliverd = true;
         }
+
 
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }

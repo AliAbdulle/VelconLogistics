@@ -4,8 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using VelconLogistics.Models;
 
-namespace VOLogistics.Models
+namespace VelconLogistics.Models
 {
     public class Driver
     {
@@ -16,11 +17,16 @@ namespace VOLogistics.Models
         public string FirstName { get; set; }
         [Required]
         public string LastName { get; set; }
+        [Required]
+        public string Work { get; set; }
        
         [NotMapped]
         [Display(Name = "FullName")]
         public string FullName => $"{FirstName} {LastName}";
 
-        public List<Load> Loads { get; set; }
+  
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
     }
 }

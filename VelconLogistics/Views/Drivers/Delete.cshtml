@@ -1,4 +1,4 @@
-﻿@model VOLogistics.Models.Driver
+﻿@model VelconLogistics.Models.Driver
 
 @{
     ViewData["Title"] = "Delete";
@@ -11,19 +11,25 @@
     <h4>Driver</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FirstName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FirstName)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.LastName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.LastName)
         </dd>
-     
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Work)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Work)
+        </dd>
+
     </dl>
     
     <form asp-action="Delete">

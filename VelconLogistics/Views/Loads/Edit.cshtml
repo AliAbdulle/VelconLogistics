@@ -1,4 +1,4 @@
-﻿@model VOLogistics.Models.Load
+﻿@model VelconLogistics.Models.LoadViewModel.LoadEditViewModels
 
 @{
     ViewData["Title"] = "Edit";
@@ -12,40 +12,36 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="LoadId" />
+            <input type="hidden" asp-for="Load.LoadId" />
+           
             <div class="form-group">
-                <label asp-for="CompanyName" class="control-label"></label>
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
+                <label asp-for="Load.Amount" class="control-label"></label>
+                <input asp-for="Load.Amount" class="form-control" />
+                <span asp-validation-for="Load.Amount" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Amount" class="control-label"></label>
-                <input asp-for="Amount" class="form-control" />
-                <span asp-validation-for="Amount" class="text-danger"></span>
+                <label asp-for="Load.PickupDate" class="control-label"></label>
+                <input asp-for="Load.PickupDate" class="form-control" />
+                <span asp-validation-for="Load.PickupDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="PickupDate" class="control-label"></label>
-                <input asp-for="PickupDate" class="form-control" />
-                <span asp-validation-for="PickupDate" class="text-danger"></span>
+                <label asp-for="Load.DeliverdDate" class="control-label"></label>
+                <input asp-for="Load.DeliverdDate" class="form-control" />
+                <span asp-validation-for="Load.DeliverdDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DeliverdDate" class="control-label"></label>
-                <input asp-for="DeliverdDate" class="form-control" />
-                <span asp-validation-for="DeliverdDate" class="text-danger"></span>
+                <label asp-for="Load.Location" class="control-label"></label>
+                <input asp-for="Load.Location" class="form-control" />
+                <span asp-validation-for="Load.Location" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DriverId" class="control-label"></label>
-                <select asp-for="DriverId" class="form-control" asp-items="ViewBag.DriverId"></select>
-                <span asp-validation-for="DriverId" class="text-danger"></span>
+                <label asp-for="Load.DriverId" class="control-label"></label>
+                <select asp-for="Load.DriverId" class="form-control" asp-items="Model.AvailableOption"></select>
+                <span asp-validation-for="Load.DriverId" class="text-danger"></span>
             </div>
             <div class="form-group form-check">
                 <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsDeliverd" /> @Html.DisplayNameFor(model => model.IsDeliverd)
+                    <input class="form-check-input" asp-for="Load.IsDeliverd" /> @Html.DisplayNameFor(model => model.Load.IsDeliverd)
                 </label>
             </div>
             <div class="form-group">
