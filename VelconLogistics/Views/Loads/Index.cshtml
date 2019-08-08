@@ -65,9 +65,9 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.LoadId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.LoadId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.LoadId">Delete</a>
+                        <button asp-route-id="@item.LoadId" class="Edit">Edit</button> 
+                        <button asp-action="Details" asp-route-id="@item.LoadId">Details</button> 
+                        <button asp-action="Delete" asp-route-id="@item.LoadId">Delete</button>
                     </td>
                 </tr>
             }
